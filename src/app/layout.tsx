@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
-import { Poppins } from 'next/font/google';
+import { Montserrat } from 'next/font/google';
 import './globals.css';
 import Sidebar from '@/components/Sidebar';
 import TopNav from '@/components/TopNav';
 
-const poppins = Poppins({
+const montserrat = Montserrat({
   weight: ['400', '500', '600', '700'],
   subsets: ['latin'],
   display: 'swap',
@@ -22,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${poppins.className} bg-black text-white flex h-screen overflow-hidden`}>
+      <body className={`${montserrat.className} bg-black text-white flex h-screen overflow-hidden`}>
         <Sidebar />
         <div className="flex-1 flex flex-col overflow-hidden relative">
           <TopNav />

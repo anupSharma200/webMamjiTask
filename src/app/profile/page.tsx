@@ -1,6 +1,34 @@
+import Image from 'next/image';
 import { Share2, Video, Globe, PlayCircle, PlusSquare } from 'lucide-react';
+import StatBadge from '@/components/StatBadge';
+import StoryCircle from '@/components/StoryCircle';
+import VideoCard from '@/components/VideoCard';
+import statusImg from '@/assets/status.png';
+import addStoryImg from '@/assets/addstory.png';
+
+import shortimg from '@/assets/shortimg.png';
 
 export default function ProfileScreen() {
+  const dummyStories = [
+    { name: 'John Deo', isNew: true, imageUrl: statusImg.src },
+    { name: 'John Deo', isNew: true, imageUrl: statusImg.src },
+    { name: 'John Deo', isNew: true, imageUrl: statusImg.src },
+    { name: 'John Deo', isNew: true, imageUrl: statusImg.src },
+    { name: 'John Deo', isNew: true, imageUrl: statusImg.src },
+    { name: 'John Deo', isNew: true, imageUrl: statusImg.src },
+    { name: 'John Deo', isNew: true, imageUrl: statusImg.src },
+  ];
+
+  const dummyVideos = Array(8).fill({
+    title: 'The Handmaid...',
+    description: 'This is why I fell in love with him, because he loves her as much as I do.',
+    views: '3.1M',
+    badge: 'S',
+    thumbnailUrl: shortimg
+  });
+
+  const categories = ['Traveling', 'Corporate Life', 'Couples', 'Trending Topic', 'Festival', 'Music listening', 'Reading time', 'Onlyfans'];
+
   return (
     <div className="flex flex-col lg:flex-row h-full">
       {/* Left Column (Main Content) */}
@@ -64,19 +92,16 @@ export default function ProfileScreen() {
           </div>
 
           {/* Stories row */}
-          <div className="flex gap-3 sm:gap-4 mt-6 sm:mt-8 pb-4 overflow-x-auto no-scrollbar">
-            <div className="flex flex-col items-center gap-2 min-w-[64px]">
-              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border border-dashed border-gray-600 flex items-center justify-center cursor-pointer hover:bg-white/5 text-gray-400">
-                <PlusSquare size={24} />
-              </div>
-              <span className="text-xs text-gray-500">Create new</span>
+          <div className="flex gap-4 mt-6 sm:mt-8 pb-4 overflow-x-auto no-scrollbar">
+            {/* Create new */}
+            <div className="flex-shrink-0 flex flex-col items-center gap-2 cursor-pointer w-[64px] sm:w-[80px]">
+              <Image src={addStoryImg} alt="Create new story" className="w-full h-auto object-contain" />
             </div>
-            {[1, 2, 3, 4, 5, 6, 7].map((i) => (
-              <div key={i} className="flex flex-col items-center gap-2 min-w-[64px]">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-orange-500 p-[2px] cursor-pointer">
-                  <div className="w-full h-full rounded-full bg-gray-800"></div>
-                </div>
-                <span className="text-xs text-gray-400">John Doe</span>
+
+            {/* User Stories (10 times) */}
+            {Array(10).fill(0).map((_, i) => (
+              <div key={i} className="flex-shrink-0 flex flex-col items-center gap-2 cursor-pointer w-[64px] sm:w-[80px]">
+                <Image src={statusImg} alt={`User story ${i + 1}`} className="w-full h-auto object-contain" />
               </div>
             ))}
           </div>
@@ -91,57 +116,41 @@ export default function ProfileScreen() {
 
           {/* Video Grid */}
           <div className="grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-3 sm:gap-4 mt-4 sm:mt-6 pb-20">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-              <div key={i} className="aspect-[9/16] bg-gray-900 rounded-xl relative overflow-hidden group cursor-pointer">
-                <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=1000&auto=format&fit=crop")' }}></div>
-                <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/80"></div>
-                
-                <div className="absolute top-2 left-2 text-xs font-bold text-white">3.1M views</div>
-                <div className="absolute top-2 right-2 w-6 h-6 bg-blue-600 rounded-md flex items-center justify-center font-bold text-white">S</div>
-                
-                <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4">
-                  <p className="text-[10px] sm:text-xs text-white line-clamp-2">This is why I fell in love with space because its out there</p>
-                  <p className="text-xs sm:text-sm font-bold text-white mt-1">The Handmaid...</p>
-                </div>
-              </div>
+            {dummyVideos.map((vid, i) => (
+              <VideoCard 
+                key={i}
+                title={vid.title}
+                description={vid.description}
+                views={vid.views}
+                badge={vid.badge}
+                thumbnailUrl={vid.thumbnailUrl}
+              />
             ))}
           </div>
         </div>
       </div>
 
       {/* Right Column (Sidebar Stats) - Hidden on Mobile */}
-      <div className="w-80 bg-[#0A0A0A] border-l border-[#1F1F1F] p-6 overflow-y-auto hidden xl:block shrink-0">
+      <div className="w-96 bg-[#0A0A0A] border-l border-[#1F1F1F] p-6 overflow-y-auto hidden xl:block shrink-0">
         <h2 className="text-white font-bold text-lg mb-6">About Your Profile</h2>
         
         <div className="grid grid-cols-2 gap-3 mb-10">
-          <div className="bg-[#111] border border-[#222] rounded-full py-3 px-4 flex items-center justify-center gap-2">
-            <span className="text-gray-400 text-xs">📊</span>
-            <span className="text-white text-sm font-bold">63.5M <span className="font-normal text-gray-400">Views</span></span>
-          </div>
-          <div className="bg-[#111] border border-[#222] rounded-full py-3 px-4 flex items-center justify-center gap-2">
-            <span className="text-gray-400 text-xs">❤️</span>
-            <span className="text-white text-sm font-bold">1.2M <span className="font-normal text-gray-400">Likes</span></span>
-          </div>
-          <div className="bg-[#111] border border-[#222] rounded-full py-3 px-4 flex items-center justify-center gap-2">
-            <span className="text-gray-400 text-xs">👁️</span>
-            <span className="text-white text-sm font-bold">1.6M <span className="font-normal text-gray-400">Visits</span></span>
-          </div>
-          <div className="bg-[#111] border border-[#222] rounded-full py-3 px-4 flex items-center justify-center gap-2">
-            <span className="text-gray-400 text-xs">🔗</span>
-            <span className="text-white text-sm font-bold">1.4M <span className="font-normal text-gray-400">Shares</span></span>
-          </div>
-          <div className="bg-[#111] border border-[#222] rounded-full py-3 px-4 flex items-center justify-center gap-2 col-span-2 w-2/3">
-            <Video size={14} className="text-gray-400" />
-            <span className="text-white text-sm font-bold">1,189 <span className="font-normal text-gray-400">videos</span></span>
-          </div>
+          <StatBadge icon="📊" value="63.5M" label="Views" className="bg-[#1A1528] border-indigo-900/50 rounded-[15px]" />
+          <StatBadge icon="❤️" value="1.2M" label="Likes" className="bg-[#1A1528] border-indigo-900/50 rounded-[15px]" />
+          <StatBadge icon="👁️" value="1.6M" label="Visits" className="bg-[#1A1528] border-indigo-900/50 rounded-[15px]" />
+          <StatBadge icon="🔗" value="1.4M" label="Shares" className="bg-[#1A1528] border-indigo-900/50 rounded-[15px]" />
+          <StatBadge icon={<Video size={14} />} value="1,189" label="videos" className="col-span-2 bg-[#1A1528] border-indigo-900/50 rounded-[15px]" />
         </div>
 
         <h2 className="text-white font-bold text-lg mb-4">Your videos Categories</h2>
-        <div className="flex flex-wrap gap-2">
-          {['Traveling', 'Corporate Life', 'Couples', 'Trending Topic', 'Festival', 'Music listening', 'Reading time', 'Onlyfans'].map((cat) => (
-            <span key={cat} className="bg-[#1A1528] text-indigo-300 border border-indigo-900/50 px-4 py-2 rounded-full text-xs font-medium">
+        <div className="grid grid-cols-3 gap-3">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              className="w-full bg-[#1A1528] text-indigo-300 border border-indigo-900/50 py-[3px] px-4 rounded-[15px] text-sm font-medium hover:bg-[#251D3A] transition-colors cursor-pointer whitespace-nowrap overflow-hidden truncate text-center"
+            >
               {cat}
-            </span>
+            </button>
           ))}
         </div>
       </div>

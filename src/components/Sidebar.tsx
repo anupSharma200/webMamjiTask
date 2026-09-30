@@ -15,23 +15,23 @@ export default function Sidebar() {
       </div>
 
       {/* Nav Icons */}
-      <nav className="flex flex-col gap-6 flex-1 text-gray-500">
-        <Link href="/" className={`transition-colors ${pathname === '/' ? 'text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]' : 'hover:text-white'}`}>
+      <nav className="flex flex-col gap-4 flex-1 text-gray-500 items-center">
+        <Link href="/" className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${pathname === '/' ? 'bg-gradient-to-b from-[#333] to-[#111] border border-[#444] text-white shadow-[inset_0_2px_4px_rgba(255,255,255,0.1)]' : 'hover:text-white'}`}>
           <Home size={22} />
         </Link>
-        <Link href="/profile" className={`transition-colors ${pathname === '/profile' ? 'text-[#00E5FF] drop-shadow-[0_0_10px_rgba(0,229,255,0.8)]' : 'hover:text-white'}`}>
+        <Link href="/profile" className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${pathname === '/profile' ? 'bg-gradient-to-b from-[#333] to-[#111] border border-[#444] text-white shadow-[inset_0_2px_4px_rgba(255,255,255,0.1)]' : 'hover:text-white'}`}>
           <Compass size={22} />
         </Link>
-        <button className="hover:text-white transition-colors">
+        <button className="w-12 h-12 rounded-full flex items-center justify-center hover:text-white transition-colors">
           <Grid size={22} />
         </button>
-        <button className="hover:text-white transition-colors">
+        <button className="w-12 h-12 rounded-full flex items-center justify-center hover:text-white transition-colors">
           <Lock size={22} />
         </button>
-        <button className="hover:text-white transition-colors">
+        <button className="w-12 h-12 rounded-full flex items-center justify-center hover:text-white transition-colors">
           <Hash size={22} />
         </button>
-        <button className="hover:text-white transition-colors">
+        <button className="w-12 h-12 rounded-full flex items-center justify-center hover:text-white transition-colors">
           <Clock size={22} />
         </button>
       </nav>
